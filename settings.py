@@ -114,6 +114,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'compressor',
+    'tastypie',
+    'core',
+    'blog',
 )
 
 # Add request to our available template tags
