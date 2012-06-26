@@ -13,5 +13,5 @@ def read(request, post_id):
 
 
 def main_page(request):
-    p = Post.objects.get(pk=1)
+    p = Post.objects.latest('id')
     return render_to_response('home.html', {'post' : p}, context_instance=RequestContext(request))
