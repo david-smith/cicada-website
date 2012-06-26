@@ -21,12 +21,7 @@ class DeviceApiKeyAuthentication(ApiKeyAuthentication):
         return True
     
     def get_identifier(self, request):
-        """
-        Provides a unique string identifier for the requestor.
-
-        This implementation returns the user's username.
-        """
-        return request.REQUEST.get('username', 'nouser')
+        return request.REQUEST.get('uuid', 'nouser')
 
 
 class UserResource(ModelResource):
