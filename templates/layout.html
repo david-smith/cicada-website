@@ -1,101 +1,63 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>CicadaHunt</title>
+		<title>The New Forest Cicada Project</title>
 		<!-- IE6-8 support of HTML elements -->
 	    <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
-	    {% load compress %}
-	    {% compress css %}
+		<script type="text/javascript">localStorage.clear();</script>
 	    <link type="text/less" href="{{ STATIC_URL }}less/bootstrap.less" rel="stylesheet">
 	    <link type="text/less" href="{{ STATIC_URL }}less/responsive.less" rel="stylesheet">
-		{% endcompress %}
-
+	    <script type="text/javascript" src="{{ STATIC_URL }}js/less-1.3.0.min.js"></script>
+		
 		<style>
 	        body {
-	            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+	            margin-top: 30px;
 	        }
 	    </style>
 	</head>
 	<body>
-		<div class="navbar navbar-fixed-top">
-		    <div class="navbar-inner">
-		        <div class="container">
-		            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		                <span class="i-bar"></span>
-		                <span class="i-bar"></span>
-		                <span class="i-bar"></span>
-		            </a>
-		            <a class="brand" href="#">CicadaHunt</a>
-		            <div class="nav-collapse">
-		                <ul class="nav">
-		                    <li class="{% ifequal request.path "/" %}active{% endifequal %}"><a href="/">Home</a></li>
-		                    <li class="{% ifequal request.path "/blog/" %}active{% endifequal %}"><a href="/blog/">Blog</a></li>
-		                    <li class="{% ifequal request.path "/about" %}active{% endifequal %}"><a href="/about">About</a></li>
-		                    <li class="{% ifequal request.path "/contact" %}active{% endifequal %}"><a href="/contact">Contact</a></li>
-		                </ul>
-		            </div><!--/.nav-collapse -->
-		        </div>
-		    </div>
-		</div>
 		<div class="container">
 			<div class="row">
-				<div class="span8">
-					{% block content %}&nbsp;{% endblock %}
+				<div class="page-header span5" style="margin-top:0;">
+					<h1>The New Forest Cicada Project</h1>
 				</div>
-	    		<div class="span4">
-	    		
-	    			<!-- Twitter widget start -->
-	    			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-					<script>
-					new TWTR.Widget({
-					  version: 2,
-					  type: 'list',
-					  rpp: 5,
-					  interval: 30000,
-					  title: '',
-					  subject: 'CicadaHunt',
-					  width: 270,
-					  height: 300,
-					  theme: {
-					    shell: {
-					      background: '#223ab3',
-					      color: '#ffffff'
-					    },
-					    tweets: {
-					      background: '#ffffff',
-					      color: '#050505',
-					      links: '#1761d1'
-					    }
-					  },
-					  features: {
-					    scrollbar: true,
-					    loop: false,
-					    live: true,
-					    behavior: 'all'
-					  }
-					}).render().setList('bbc', 'news').start();
-					</script>
-					<!-- Twitter widget end -->
-					<br/>
-					<h3>Weather Forecast</h3>
-					<!-- Met Office widget start -->
-					<script type="text/javascript"> 
-					moDays=5; moColourScheme="default"; moFSSI=352478; moDomain="www.metoffice.gov.uk"; moMapDisplay="none"; 
-					moMapsRequired=""; moTemperatureUnits="C"; moSpeedUnits="M"; moShowWind="true"; moShowUV="true"; 
-					moShowFeelsLike="false"; moAllowUserLocation="false"; moStartupLanguage="en"; moSpecificHeight="0"; moSpecificWidth="0"; 
-					</script>
-					<script type="text/javascript" src="http://www.metoffice.gov.uk/public/pws/components/yoursite/loader.js"> </script>
-					<!-- Met Office widget end -->
-	    		</div>
-    		</div>
-		</div> <!-- /container -->
+				<div class="span4" style="width:327px; float:right;">
+					<div class="navbar" style="">
+						<div class="navbar-inner">
+							<div class="container">
+								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						        	<span class="i-bar"></span>
+						            <span class="i-bar"></span>
+						            <span class="i-bar"></span>
+								</a>
+						        <div class="nav-collapse">
+						        	<ul class="nav">
+						            	<li class="{% ifequal request.path "/" %}active{% endifequal %}"><a href="/">Home</a></li>
+						                <li class="{% ifequal request.path "/about" %}active{% endifequal %} dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+											<ul class="dropdown-menu">
+												<li><a href="/about/cicada">The Cicada</a></li>
+												<li><a href="/about/team">The Team</a></li>
+											</ul>
+										</li>
+					                    <li class="{% ifequal request.path "/blog/" %}active{% endifequal %}"><a href="/blog/">Blog</a></li>
+					                    <li class="{% ifequal request.path "/app" %}active{% endifequal %}"><a href="/app">App</a></li>
+					                    <li class="{% ifequal request.path "/contact" %}active{% endifequal %}"><a href="/contact">Contact</a></li>
+					                </ul>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+				</div>	
+			</div>
+
+			{% block content %}&nbsp;{% endblock %}
+		</div>
 
 
-		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-		{% compress js %}
 		<script src="{{ STATIC_URL }}js/tests/vendor/jquery.js"></script>
 		<script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
 		<script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
@@ -109,6 +71,8 @@
 		<script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
 		<script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
 		<script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
-		{% endcompress %}
+		
+		
+		{% block javascript %}{% endblock %} 	
 	</body>
 </html>

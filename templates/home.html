@@ -1,5 +1,53 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<p>It's working! You didn't screw anything up!</p>
+<div id="headerCarousel" class="carousel slide">
+	<div class="carousel-inner">
+		<div class="active item"><img style="width:970px" src="http://aicvm-dz1.ecs.soton.ac.uk/images/pinchen3-2-960x300.jpg"/></div>
+		<div class="item"><img style="width:970px" src="http://aicvm-dz1.ecs.soton.ac.uk/images/Jaroslav_scaled.jpg"/></div>
+		
+		
+	</div>
+	
+	<a style="margin-top:5px;" class="carousel-control left" href="#headerCarousel" data-slide="prev">&lsaquo;</a>
+	<a style="margin-top:5px;" class="carousel-control right" href="#headerCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<div class="row">
+	<div id="blog_section" class="span7">
+		<div style="border-bottom: 1px solid rgb(238, 238, 238);">
+			<h3 style="display:inline;">{{post.title}}</h3>
+			<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
+		</div>
+		<div style="padding:5px;">
+			{{ post.content }}
+			<br/>
+			<em class="pull-right">{{post.author}}</em>
+		</div>
+	</div>
+	<div class="span3">
+		<h4>Twitter</h4>
+		<div id="twitter_feed"></div>
+		<br/>
+		Weather
+	</div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+	$('.carousel').carousel();	
+	$.ajax({
+		url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=bbcnews&trim_user=true&count=3&include_rts=1",
+		dataType: "jsonp",
+		jsonpCallback: "populateTwitterList"
+	});
+	function populateTwitterList(data) {
+		$.each(data, function(index, value){
+			$('#twitter_feed').append(value.text).append('<br/>');
+		});
+		 
+	}
+
+</script>
 {% endblock %}

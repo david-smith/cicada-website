@@ -10,3 +10,8 @@ def index(request):
 def read(request, post_id):
     p = get_object_or_404(Post, pk=post_id)
     return render_to_response('blog/read.html', {'post': p}, context_instance=RequestContext(request))
+
+
+def main_page(request):
+    p = Post.objects.get(pk=1)
+    return render_to_response('home.html', {'post' : p}, context_instance=RequestContext(request))

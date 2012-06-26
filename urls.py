@@ -17,9 +17,11 @@ urlpatterns = patterns('',
     # url(r'^$', 'cicada.views.home', name='home'),
     # url(r'^cicada/', include('cicada.foo.urls')),
     
-    url(r'^$', TemplateView.as_view(template_name='home.html')),
-    url(r'^about$', TemplateView.as_view(template_name='about.html')),
+    url(r'^$', 'blog.views.main_page'),
+    url(r'^about/team$', TemplateView.as_view(template_name='team.html')),
+    url(r'^about/cicada', TemplateView.as_view(template_name='cicada.html')),
     url(r'^contact$', TemplateView.as_view(template_name='contact.html')),
+    url(r'^app$', TemplateView.as_view(template_name='app.html')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls')),

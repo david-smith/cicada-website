@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="headerCarousel" class="carousel slide">
+	<div class="carousel-inner">
+		<div class="active item"><img style="width:970px" src="http://aicvm-dz1.ecs.soton.ac.uk/images/pinchen3-2-960x300.jpg"/></div>
+		<div class="item"><img style="width:970px" src="http://aicvm-dz1.ecs.soton.ac.uk/images/Jaroslav_scaled.jpg"/></div>
+		
+		
+	</div>
+	
+	<a style="margin-top:5px;" class="carousel-control left" href="#headerCarousel" data-slide="prev">&lsaquo;</a>
+	<a style="margin-top:5px;" class="carousel-control right" href="#headerCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<p>
+The New Forest Cicada is an insect native to the UK in great danger of becoming extinct.  Several entomologists have searched for it
+in the past few years, but no sighting has been confirmed for over a decade.  However, the area where the cicada could be found is
+vast, extending to the entire New Forest and potentially other sites in Southern England.  This cicada makes a high-pitched call that
+is difficult for adults to hear as it is at the edge of our ears' frequency range.
+</p>
+
+<p>
+Visitors to the New Forest (millions every year) will use their smartphones to capture and classify the sound produced by the 
+cicada, effectively mapping where the insect can or cannot be found. A smartphone app to classify the call is currently being 
+developed, while research is looking into methods to incentivise people's involvement. 
+</p>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+	$('.carousel').carousel();
+</script>
+{% endblock %}
