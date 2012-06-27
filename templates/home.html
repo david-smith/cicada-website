@@ -49,14 +49,13 @@
 		jsonpCallback: "populateTwitterList"
 	});
 	function populateTwitterList(data) {
+		tweet_string = ""
 		$.each(data, function(index, value){
-			if(value.retweeted_status){
-				$('#twitter_feed').append('<a href="https://twitter.com/' + value.retweeted_status.user.screen_name + '/status/' + value.retweeted_status.id + '">' + value.text + '</a><br/>').append('<br/>');
-			}
-			else{
-				$('#twitter_feed').append('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id + '">' + value.text + '</a><br/>').append('<br/>');
-			}
-		});	 
+			tweet_string += '<a href="http://twitter.com/'
+			tweet_string += value.user.screen_name + '/status/' + value.id_str;
+			tweet_string += '">' + value.text + '</a><br/><br/>';
+		});
+		$('#twitter_feed').html(tweet_string);
 	}
 
 </script>
