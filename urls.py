@@ -22,8 +22,11 @@ urlpatterns = patterns('',
     url(r'^about/cicada$', TemplateView.as_view(template_name='cicada.html')),
     url(r'^contact$', TemplateView.as_view(template_name='contact.html')),
     url(r'^app$', TemplateView.as_view(template_name='app.html')),
-    url(r'^login$', 'core.views.login'),
-    url(r'^register$', 'core.views.register'),
+    url(r'^login$', 'core.views.login_view'),
+    url(r'^logout$', 'core.views.logout_view'),
+    
+    url(r'^tracker/', include('backend.urls')),
+    
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls')),

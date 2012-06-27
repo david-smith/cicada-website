@@ -41,7 +41,7 @@
 
 {% block javascript %}
 <script type="text/javascript">
-$(document).ready(function(){
+
 	$('.carousel').carousel();	
 	$.ajax({
 		url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=bbcnews&count=3&include_rts=1",
@@ -58,6 +58,6 @@ $(document).ready(function(){
 			}
 		});	 
 	}
-});
+
 </script>
 {% endblock %}

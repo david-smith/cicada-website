@@ -2,11 +2,17 @@
 {% block content %}
 <div class="span4 offset3" style="text-align:center;">
 	<h6>Please log in</h6>
-	<div class="well">
-		<input id="id_username" name="username" maxlength="255" type="text" placeholder="Username">
-		<input id="id_password" name="password" maxlength="255" type="password" placeholder="Password">
-		<br/>
-		<input type="submit" value="Log in" />
-	</div>
+	<form method="post" action="/login">
+		<div class="well">
+			{% csrf_token %}
+			{% if error %}
+			<div class="alert alert-error">{{ error }}</div>
+			{% endif %}
+			<input id="id_username" name="username" maxlength="255" type="text" placeholder="Username">
+			<input id="id_password" name="password" maxlength="255" type="password" placeholder="Password">
+			<br/>
+			<input type="submit" value="Log in" />
+		</div>
+	</form>
 </div>
 {% endblock %}
