@@ -1,13 +1,37 @@
 {% extends "layout.html" %}
 
 {% block content%}
-{% if latest_post_list %}
-    <ul>
-    {% for post in latest_post_list %}
-        <li><a href="/blog/{{ post.id }}/">{{ post.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No posts are available.</p>
-{% endif %}
+<div class="well" style="text-align:center;">
+	<img src="{{STATIC_URL}}img/soton.png" />
+	<img src="{{STATIC_URL}}img/orchid.png" />
+	<img src="{{STATIC_URL}}img/epsrc.png" />
+</div>
+<div class="row">
+	<div class="span7">
+	{% if latest_post_list %}
+	    {% for post in latest_post_list %}
+	        <div id="blog_section" class="" style="margin-bottom:50px;">
+				<div style="border-bottom: 1px solid rgb(238, 238, 238);">
+					<h3 style="display:inline;">{{post.title}}</h3>
+					<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
+				</div>
+				<div style="padding:5px;">
+					{{ post.content|safe|linebreaks }}
+					<br/>
+					<em class="pull-right">Posted by {{post.author}}</em>
+				</div>
+			</div>
+	    {% endfor %}
+	{% else %}
+	    <p>No posts are available.</p>
+	{% endif %}
+	</div>
+	<div class="span3">
+		<h6>Archive</h6>
+		<ul>
+			<li>June 2012</li>
+			
+		</ul>
+	</div>
+</div>
 {% endblock %}

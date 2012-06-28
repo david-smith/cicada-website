@@ -36,3 +36,10 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+def weather(request):
+    import urllib2
+    response = urllib2.urlopen("http://partner.metoffice.gov.uk/public/val/wxfcs/all/json/352478?res=daily&key=96b521e9-dd99-4e2c-9816-61dd6581d50f")
+    response_data = response.read()
+    return render_to_response('weather.html', {'data': response_data}, mimetype='application/json');
+    

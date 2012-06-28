@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 
-{% block content %}
-{{ post.title }}
-<br/>
-{{ post.content }}
+{% block content%}
+<div id="blog_section" class="" style="margin-bottom:50px;">
+	<div style="border-bottom: 1px solid rgb(238, 238, 238);">
+		<h3 style="display:inline;">{{post.title}}</h3>
+		<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
+	</div>
+	<div style="padding:5px;">
+		{{ post.content|safe|linebreaks }}
+		<br/>
+		<em class="pull-right">Posted by {{post.author}}</em>
+	</div>
+</div>
 {% endblock %}

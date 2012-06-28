@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+<div id="headerCarousel" class="carousel slide">
+	<div class="carousel-inner">
+		<div class="item"><img style="width:970px" src="{{STATIC_URL}}img/pinchen3-2-960x300.jpg"/></div>
+		<div class="active item"><img style="width:970px" src="{{STATIC_URL}}img/Jaroslav_scaled.jpg"/></div>
+	</div>
+	
+	<a style="margin-top:5px;" class="carousel-control left" href="#headerCarousel" data-slide="prev">&lsaquo;</a>
+	<a style="margin-top:5px;" class="carousel-control right" href="#headerCarousel" data-slide="next">&rsaquo;</a>
+</div>
 <h2 style="text-align:justify">The Team</h2>
 <div style="padding:10px 0;">
 	<strong>Principal Investigator:</strong> Dr Alex Rogers [@ - www]<br/>

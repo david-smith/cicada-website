@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^app$', TemplateView.as_view(template_name='app.html')),
     url(r'^login$', 'core.views.login_view'),
     url(r'^logout$', 'core.views.logout_view'),
+    url(r'^weather$', 'core.views.weather'),
     
     url(r'^tracker/', include('backend.urls')),
     

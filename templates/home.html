@@ -5,8 +5,6 @@
 	<div class="carousel-inner">
 		<div class="item"><img style="width:970px" src="{{STATIC_URL}}img/pinchen3-2-960x300.jpg"/></div>
 		<div class="active item"><img style="width:970px" src="{{STATIC_URL}}img/Jaroslav_scaled.jpg"/></div>
-		
-		
 	</div>
 	
 	<a style="margin-top:5px;" class="carousel-control left" href="#headerCarousel" data-slide="prev">&lsaquo;</a>
@@ -19,9 +17,9 @@
 			<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
 		</div>
 		<div style="padding:5px;">
-			{{ post.content }}
+			{{ post.content|safe|linebreaks }}
 			<br/>
-			<em class="pull-right">{{post.author}}</em>
+			<em class="pull-right">Posted by {{post.author}}</em>
 		</div>
 	</div>
 	<div class="span3">
@@ -33,7 +31,14 @@
 			<br/>
 		</div>
 		<br/>
-		Weather
+		<div class="well">
+			<h4>Weather</h4>
+			<br/>	
+			<div id="weather_feed"></div>
+			<br/>
+			<em class="pull-right">Weather supplied by The Met Office</em>
+			<br/>
+		</div>
 	</div>
 </div>
 {% endblock %}
@@ -41,8 +46,73 @@
 
 {% block javascript %}
 <script type="text/javascript">
-
-	$('.carousel').carousel();	
+	
+	$.ajax({
+		url: '/weather',
+		dataType: 'json',
+		success: function(data, textStatus, jqXHR){
+			weatherdata = {
+				'NA':'Not available',
+				'0':'Clear sky',
+				'1':'Sunny',
+				'2':'Partly cloudy (night)',
+				'3':'Sunny intervals',
+				'4':'Dust',
+				'5':'Mist',
+				'6':'Fog',
+				'7':'Medium-level cloud',
+				'8':'Low-level cloud',
+				'9':'Light rain shower (night)',
+				'10':'Light rain shower (day)',
+				'11':'Drizzle',
+				'12':'Light rain',
+				'13':'Heavy rain shower (night)',
+				'14':'Heavy rain shower (day)',
+				'15':'Heavy rain',
+				'16':'Sleet shower (night)',
+				'17':'Sleet shower (day)',
+				'18':'Sleet',
+				'19':'Hail shower (night)',
+				'20':'Hail shower (day)',
+				'21':'Hail',
+				'22':'Light snow shower (night)',
+				'23':'Light snow shower (day)',
+				'24':'Light snow',
+				'25':'Heavy snow shower (night)',
+				'26':'Heavy snow shower (day)',
+				'27':'Heavy snow',
+				'28':'Thundery shower (night)',
+				'29':'Thundery shower (day)',
+				'30':'Thunder storm',
+				'31':'Tropical storm',
+				'33':'Haze',
+			};
+			
+			days = {
+				'0':'Sunday',
+				'1':'Monday',
+				'2':'Tuesday',
+				'3':'Wednesday',
+				'4':'Thursday',
+				'5':'Friday',
+				'6':'Saturday'
+			}
+			console.log(data.SiteRep.DV.Location.Period[0]);
+			
+			console.log();
+			
+			weather_string = "";
+			$.each(data.SiteRep.DV.Location.Period, function(index, value){
+				d = data.SiteRep.DV.Location.Period[index]['@val'];
+				dd = new Date(d.substring(0, d.length - 1));
+				weather_string += days[dd.getDay()] + ' - ' + weatherdata[data.SiteRep.DV.Location.Period[index].Rep[0]['@W']];
+				weather_string += "<br/>";
+			});
+			$('#weather_feed').html(weather_string);
+		}
+	});
+	
+	
 	$.ajax({
 		url: "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=bbcnews&count=3&include_rts=1",
 		dataType: "jsonp",
@@ -51,7 +121,7 @@
 	function populateTwitterList(data) {
 		tweet_string = ""
 		$.each(data, function(index, value){
-			tweet_string += '<a href="http://twitter.com/'
+			tweet_string += '<a target="_blank" href="http://twitter.com/'
 			tweet_string += value.user.screen_name + '/status/' + value.id_str;
 			tweet_string += '">' + value.text + '</a><br/><br/>';
 		});
