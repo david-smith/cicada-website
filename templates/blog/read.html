@@ -1,15 +1,44 @@
 {% extends "layout.html" %}
+{% load comments %}
 
 {% block content%}
-<div id="blog_section" class="" style="margin-bottom:50px;">
-	<div style="border-bottom: 1px solid rgb(238, 238, 238);">
-		<h3 style="display:inline;">{{post.title}}</h3>
-		<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
+<div class="well" style="text-align:center;">
+	<img src="{{STATIC_URL}}img/soton.png" />
+	<img src="{{STATIC_URL}}img/orchid.png" />
+	<img src="{{STATIC_URL}}img/epsrc.png" />
+</div>
+<div class="row">
+	<div id="blog_section" class="span7" style="margin-bottom:50px;">
+		<div style="border-bottom: 1px solid rgb(238, 238, 238);">
+			<h3 style="display:inline;">{{post.title}}</h3>
+			<h4 style="display:inline;float:right;margin-top:6px;">
+				{% get_comment_count for post as comment_count %}
+				<a href="/blog/{{post.id}}#comment_form" style="color:inherit;text-decoration:none;">Comments: <span class="badge">{{ comment_count }}</span></a>
+			</h4>
+		</div>
+		<div style="padding:5px;">
+			<em class="">Posted by {{post.author}}, {{ post.pub_date|date:"d F Y" }}</em>
+			{{ post.content|safe|linebreaks }}
+			<br/>
+			<div id="comment_form">
+				{% render_comment_list for post %}
+				<h4>Leave a comment</h4>
+				{% get_comment_form for post as form %}
+				<form action="{% comment_form_target %}" method="post">
+					{% csrf_token %}
+					<input id="id_name" type="text" name="name" maxlength="50" />
+					<input type="text" name="url" id="id_url" />
+					<input type="text" name="email" id="id_email" />
+					<textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+					{{ form.content_type }}
+					{{ form.obect_pk }}
+					{{ form.timestamp }}
+					{{ form.security_hash }}
+					<div style="display:none">{{ form.honeypot }}</div>
+				</form>
+			</div>
+		</div>
 	</div>
-	<div style="padding:5px;">
-		{{ post.content|safe|linebreaks }}
-		<br/>
-		<em class="pull-right">Posted by {{post.author}}</em>
-	</div>
+	<div class="span3"></div>
 </div>
 {% endblock %}

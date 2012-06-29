@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load comments %}
 {% block content%}
 <div class="well" style="text-align:center;">
 	<img src="{{STATIC_URL}}img/soton.png" />
@@ -12,13 +12,16 @@
 	    {% for post in latest_post_list %}
 	        <div id="blog_section" class="" style="margin-bottom:50px;">
 				<div style="border-bottom: 1px solid rgb(238, 238, 238);">
-					<h3 style="display:inline;">{{post.title}}</h3>
-					<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
+					<h3 style="display:inline;"><a style="text-decoration:none;padding-left:5px;" href="/blog/{{post.id}}">{{post.title}}</a></h3>
+					<h4 style="display:inline;float:right;margin-top:6px;">
+					{% get_comment_count for post as comment_count %}
+						<a href="/blog/{{post.id}}#comment_form" style="color:inherit;text-decoration:none;">Comments: <span class="badge">{{comment_count}}</span></a>
+					</h4>
 				</div>
 				<div style="padding:5px;">
+					<em class="">Posted by {{post.author}}, {{ post.pub_date|date:"d F Y" }}</em>
 					{{ post.content|safe|linebreaks }}
 					<br/>
-					<em class="pull-right">Posted by {{post.author}}</em>
 				</div>
 			</div>
 	    {% endfor %}

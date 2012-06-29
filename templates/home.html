@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
+{% load comments %}
 
 {% block content %}
+
 <div id="headerCarousel" class="carousel slide">
 	<div class="carousel-inner">
 		<div class="item"><img style="width:970px" src="{{STATIC_URL}}img/pinchen3-2-960x300.jpg"/></div>
@@ -12,14 +14,24 @@
 </div>
 <div class="row">
 	<div id="blog_section" class="span7">
-		<div style="border-bottom: 1px solid rgb(238, 238, 238);">
+		<div style="padding:5px;">
+			<h2>Welcome message</h2>
+			<strong>Visitors to the New Forest (millions every year) will use their smartphones to capture and classify the sound 
+			produced by the cicada, effectively mapping where the insect can or cannot be found. A smartphone app to classify 
+			the call is currently being developed, while research is looking into methods to incentivise people's involvement.</strong>
+		</div>
+		
+		<div style="border-bottom: 1px solid rgb(238, 238, 238);padding-top:10px;">
 			<h3 style="display:inline;">{{post.title}}</h3>
-			<h4 style="display:inline;float:right;margin-top:7px;">{{ post.pub_date|date:"F d, Y" }}</h4>
+			<h4 style="display:inline;float:right;margin-top:6px;">
+				{% get_comment_count for post as comment_count %}
+				<a href="/blog/{{post.id}}#comment_form" style="color:inherit;text-decoration:none;">Comments: <span class="badge">{{comment_count}}</span></a>
+			</h4>
 		</div>
 		<div style="padding:5px;">
+			<em class="">Posted by {{post.author}}, {{ post.pub_date|date:"d F Y" }}</em>
 			{{ post.content|safe|linebreaks }}
 			<br/>
-			<em class="pull-right">Posted by {{post.author}}</em>
 		</div>
 	</div>
 	<div class="span3">
