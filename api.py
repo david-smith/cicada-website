@@ -1,7 +1,7 @@
 from tastypie.utils import trailing_slash
 from tastypie.resources import ModelResource
 from tastypie import fields
-from core.models import Device, Sighting
+from cicada.core.models import Device, Sighting
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from tastypie.authentication import ApiKeyAuthentication
@@ -34,7 +34,7 @@ class UserResource(ModelResource):
         allowed_methods = ['get']
         
     def apply_authorization_limits(self, request, object_list):
-        return object_list.filter(user = request.user)
+        return object_list.filter(username = request.user)
     
     def override_urls(self):
         return [
@@ -80,7 +80,7 @@ class DeviceResource(ModelResource):
     class Meta:
         resource_name = 'device'
         queryset = Device.objects.all()
-        allowed_methods = ['get']
+        allowed_methods = []
         
 class SightingResource(ModelResource):
     device = fields.ForeignKey(DeviceResource, 'device')

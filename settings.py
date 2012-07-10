@@ -114,8 +114,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.comments',
     'tastypie',
-    'core',
-    'blog',
+    'cicada.core',
+    'cicada.blog',
+    'cicada.backend',
 )
 
 # Add request to our available template tags

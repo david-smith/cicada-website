@@ -17,20 +17,20 @@ urlpatterns = patterns('',
     # url(r'^$', 'cicada.views.home', name='home'),
     # url(r'^cicada/', include('cicada.foo.urls')),
     
-    url(r'^$', 'blog.views.main_page'),
+    url(r'^$', 'cicada.blog.views.main_page'),
     url(r'^about/team$', TemplateView.as_view(template_name='team.html')),
     url(r'^about/cicada$', TemplateView.as_view(template_name='cicada.html')),
     url(r'^contact$', TemplateView.as_view(template_name='contact.html')),
     url(r'^app$', TemplateView.as_view(template_name='app.html')),
-    url(r'^login$', 'core.views.login_view'),
-    url(r'^logout$', 'core.views.logout_view'),
-    url(r'^weather$', 'core.views.weather'),
+    url(r'^login$', 'cicada.core.views.login_view'),
+    url(r'^logout$', 'cicada.core.views.logout_view'),
+    url(r'^weather$', 'cicada.core.views.weather'),
     
-    url(r'^tracker/', include('backend.urls')),
+    url(r'^tracker/', include('cicada.backend.urls')),
     
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/', include('blog.urls')),
+    url(r'^blog/', include('cicada.blog.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     
     # API
