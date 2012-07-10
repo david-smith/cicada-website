@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, redirect
-from django.template.context import RequestContext
 from django import forms
 from django.contrib.auth import authenticate, login, logout
+from common.shortcuts import render_response
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=255)
@@ -21,17 +21,14 @@ def login_view(request):
                     login(request, user)
                     return redirect('/tracker')
                 else:
-                    return render_to_response('core/login.html', {'form' : form, 'error' : 'Account not active'}, 
-                                              context_instance=RequestContext(request))
+                    return render_response(request, 'core/login.html', {'form' : form, 'error' : 'Account not active'})
             else:
-                return render_to_response('core/login.html', {'form' : form, 'error' : 'Username or password was incorrect'}, 
-                                          context_instance=RequestContext(request))
+                return render_response(request, 'core/login.html', {'form' : form, 'error' : 'Username or password was incorrect'})
         else:
-            return render_to_response('core/login.html', {'form' : form, 'error' : 'Form not valid'}, 
-                                          context_instance=RequestContext(request))       
+            return render_response(request, 'core/login.html', {'form' : form, 'error' : 'Form not valid'})
     else:
         form = LoginForm()
-        return render_to_response('core/login.html', {'form' : form}, context_instance=RequestContext(request))
+        return render_response(request, 'core/login.html', {'form' : form})
     
 def logout_view(request):
     logout(request)

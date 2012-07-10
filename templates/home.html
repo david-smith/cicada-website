@@ -5,8 +5,9 @@
 
 <div id="headerCarousel" class="carousel slide">
 	<div class="carousel-inner">
-		<div class="item"><img style="width:970px" src="{{STATIC_URL}}img/pinchen3-2-960x300.jpg"/></div>
-		<div class="active item"><img style="width:970px" src="{{STATIC_URL}}img/Jaroslav_scaled.jpg"/></div>
+		{% for item in carousel_images %}
+			<div class="item {% if item == carousel_images|first %}active{%endif%}"><img style="width:970px" src="{{STATIC_URL}}img/carousel/{{item}}"/></div>
+		{% endfor %}
 	</div>
 	
 	<a style="margin-top:5px;" class="carousel-control left" href="#headerCarousel" data-slide="prev">&lsaquo;</a>
