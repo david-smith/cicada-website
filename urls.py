@@ -34,6 +34,9 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     
     # API
-    url(r'^api/', include(v1_api.urls))
+    url(r'^api/', include(v1_api.urls)),
+    
+    # django-socialregistration
+    url(r'', include('social_auth.urls')),
     
 )

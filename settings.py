@@ -96,6 +96,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+
+
 )
 
 ROOT_URLCONF = 'urls'
@@ -113,10 +115,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.comments',
-    'tastypie',
+    
+    # Cicada apps
     'cicada.core',
     'cicada.blog',
     'cicada.backend',
+
+    # API
+    'tastypie',
+        
+    'social_auth',
 )
 
 # Add request to our available template tags
@@ -125,6 +133,20 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
     'common.util.carousel_file_list_processor',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+)
+
+TWITTER_CONSUMER_KEY         = 'n4JKmNKTtspvuexyA0pwOQ'
+TWITTER_CONSUMER_SECRET      = 'BqNDu1T1xSvUCWqetaVlpB0OsluFK2KgIPOnzXgaOw'
+FACEBOOK_APP_ID = '384675371586013'
+FACEBOOK_API_SECRET = '73c90b15f9efeaaf76414b1c9ecfa39b'
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+LOGIN_REDIRECT_URL = '/tracker/'
 
 LOGGING = {
     'version': 1,
@@ -151,3 +173,4 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
