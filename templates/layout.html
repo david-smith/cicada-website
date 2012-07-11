@@ -24,10 +24,10 @@
 	<body style="background:url('{{ STATIC_URL }}img/bodybg.jpg')">
 		<div class="container" style="background:white;padding:10px;border-radius:10px;">
 			<div class="row">
-				<div class="span5" style="margin-top:4px;margin-left:100px;padding-bottom:10px;">
+				<div class="span4" style="margin-top:4px;margin-left:100px;padding-bottom:10px;">
 					<h1 style="font-family:'Yanone Kaffeesatz';font-weight:400;font-size:40px;">The New Forest Cicada Project</h1>
 				</div>
-				<div class="span4" style="width:389px; float:right;">
+				<div class="span4" style="width:450px; float:right;">
 					<div class="navbar" style="">
 						<div class="navbar-inner">
 							<div class="container">
@@ -50,12 +50,12 @@
 					                    <li class="{% ifequal request.path "/blog/" %}active{% endifequal %}"><a href="/blog/">Blog</a></li>
 					                    <li class="{% ifequal request.path "/app" %}active{% endifequal %}"><a href="/app">App</a></li>
 					                    <li class="{% ifequal request.path "/contact" %}active{% endifequal %}"><a href="/contact">Contact</a></li>
-					                    {% if user.is_authenticated %}
-					                    <!-- li class="{% ifequal request.path "/logout" %}active{% endifequal %}"><a href="/logout">Logout</a></li-->
-					                    {% else %}
-					                    <!-- li class="{% ifequal request.path "/login" %}active{% endifequal %}"><a href="/login">Login</a></li-->
-					                    {% endif %}
 					                    <li class="{% ifequal request.path "/tracker" %}active{% endifequal %}"><a href="/tracker">Tracker</a></li>
+					                    {% if user.is_authenticated %}
+					                    <li class="{% ifequal request.path "/logout" %}active{% endifequal %}"><a href="/logout">Logout</a></li>
+					                    {% else %}
+					                    <li class="{% ifequal request.path "/login" %}active{% endifequal %}"><a href="/login">Login</a></li>
+					                    {% endif %}
 					                    {% endblock %}
 					                </ul>
 					            </div>
