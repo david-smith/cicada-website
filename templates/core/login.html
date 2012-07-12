@@ -2,8 +2,8 @@
 {% block content %}
 <div class="span4 offset3" style="text-align:center;">
 	<h6>Please log in</h6>
-	<form method="post" action="/login">
-		<div class="well">
+	<div class="well">
+		<form method="post" action="/login">
 			{% csrf_token %}
 			{% if error %}
 			<div class="alert alert-error">{{ error }}</div>
@@ -12,9 +12,29 @@
 			<input id="id_password" name="password" maxlength="255" type="password" placeholder="Password">
 			<br/>
 			<input type="submit" value="Log in" />
+		</form>
+	</div>
+	<div style="text-align:left;">			
+		Other ways to log in:<br/>
+		<p><a class="" href="{% url socialauth_begin 'twitter' %}"><img src="{{STATIC_URL}}img/icons/twitter.png"/></a>
+		<a style="float:right;" class="" href="{% url socialauth_begin 'facebook' %}"><img src="{{STATIC_URL}}img/icons/facebook.png"/></a></p>
+		<p><a class="" href="{% url socialauth_begin 'google' %}"><img src="{{STATIC_URL}}img/icons/google.png"/></a>
+		<a style="float:right;" class="" data-toggle="modal" href="#openidLogin" ><img src="{{STATIC_URL}}img/icons/openid.png"/></a></p	
+	</div>
+	<div class="modal hide" id="openidLogin">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">X</button>
+			<h3>Sign in using OpenID</h3>
 		</div>
-		<p><a href="{% url socialauth_begin 'twitter' %}"><img style="" src="{{STATIC_URL}}img/sign-in-with-twitter-l.png"/></a></p>
-		<p><a href="{% url socialauth_begin 'facebook' %}"><img style="" src="{{STATIC_URL}}img/login-facebook-button.png"/></a></p>
-	</form>
+		<div class="modal-body">
+			<form action="{% url socialauth_begin 'openid' %}" method="POST">
+				{% csrf_token %}
+				<p>Please enter your OpenID identifier.</p>
+				<p>eg. <span style="font-style:italic;font-weight:bold;">username</span>.wordpress.com or openid.aol.com/<span style="font-style:italic;font-weight:bold;">screenname</span></p>
+				<input id="openid_identifier" value="" name="openid_identifier" type="text"><br/>
+          		<input value="Log in" type="submit">
+			</form>
+		</div>
+	</div>
 </div>
 {% endblock %}

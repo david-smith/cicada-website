@@ -138,6 +138,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleBackend',
+    'social_auth.backends.OpenIDBackend',
 )
 
 TWITTER_CONSUMER_KEY         = 'n4JKmNKTtspvuexyA0pwOQ'
