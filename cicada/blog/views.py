@@ -1,6 +1,7 @@
 from cicada.blog.models import Post
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
 from common.shortcuts import render_response
+from django.template.context import RequestContext
 # Create your views here.
 
 def index(request):
@@ -13,4 +14,4 @@ def read(request, post_id):
 
 def main_page(request):
     p = Post.objects.latest('id')
-    return render_response(request, 'home.html', {'post' : p})
+    return render_to_response( 'home.html', {'post' : p}, context_instance=RequestContext(request))
