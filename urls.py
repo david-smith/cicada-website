@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'cicada.views.home', name='home'),
     # url(r'^cicada/', include('cicada.foo.urls')),
     
+    
     url(r'^$', 'cicada.blog.views.main_page'),
     url(r'^about/team$', TemplateView.as_view(template_name='team.html')),
     url(r'^about/cicada$', TemplateView.as_view(template_name='cicada.html')),
@@ -37,6 +38,6 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
     
     # django-socialregistration
-    url(r'', include('social_auth.urls')),
+    url(r'^account/', include('social_auth.urls')),
     
 )
